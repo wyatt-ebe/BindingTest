@@ -12,18 +12,21 @@ struct ContentView: View {
   var body: some View {
     VStack(spacing: 12) {
       Text("Primary Count: \(viewModel.count)")
-      subView
       Button("Increase") {
         viewModel.increaseCount()
       }
       Button("Decrease") {
         viewModel.decreaseCount()
       }
+      Spacer()
+        .frame(height: 20)
+      subView
     }
   }
-  
+
   var subView: some View {
-    SubView(viewModel: .init(count: $viewModel.count))
+    SubView(viewModel: .init(count: $viewModel.count,
+                             change: viewModel.objectWillChange))
   }
 }
 

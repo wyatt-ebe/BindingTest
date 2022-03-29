@@ -9,14 +9,36 @@ import SwiftUI
 
 struct SubView: View {
   @StateObject var viewModel: SubViewModel
+  
   var body: some View {
-    Text("Count: \(viewModel.count)")
-      .padding()
+    VStack(spacing: 12) {
+      Text("Count: \(viewModel.count)")
+      Text("CountDirectString: \(viewModel.countDirectString)")
+      Text("CountString: \(viewModel.countString)")
+      Text("Dumb: \(viewModel.dumb)")
+      Button("Sub Increase") {
+        viewModel.increaseCount()
+      }
+      Button("Sub Decrease") {
+        viewModel.decreaseCount()
+      }
+    }
   }
 }
 
 struct SubView_Previews: PreviewProvider {
+  static var _index: Int = 0
+  
+  static var index: Binding<Int> = .init(
+    get: {
+      return _index
+    },
+    set: { int in
+      _index = int
+    }
+  )
+  
   static var previews: some View {
-    SubView(viewModel: .init(count: .init(get: { return 0 }, set: { newValue in })))
+    SubView(viewModel: .init(count: index, change: nil))
   }
 }
