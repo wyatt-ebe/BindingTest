@@ -26,7 +26,7 @@ struct ContentView: View {
 
   var subView: some View {
     SubView(viewModel: .init(count: $viewModel.count,
-                             change: viewModel.objectWillChange))
+                             change: viewModel))
   }
 }
 
